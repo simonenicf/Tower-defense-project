@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class buildtowers : MonoBehaviour
@@ -8,14 +10,23 @@ public class buildtowers : MonoBehaviour
     private GameObject prefabObject;
     
     [SerializeField]
+    private Renderer renderedObject;
+
+    [SerializeField]
     private KeyCode getTower = KeyCode.A;
+    
     [SerializeField]
     private KeyCode cancelAction = KeyCode.Escape;
 
     private GameObject currentPlaceableTower;
+    private bool canPlace;
     void Start()
     {
-        
+        // retrieve's the prefab form asset folder
+        prefabObject = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/prefab-test.prefab");
+        Debug.Log(prefabObject);
+        Debug.Log((GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/prefab-test.prefab"));
+        renderedObject = GetComponent<Renderer>();
     }
 
     // Update is called once per frame
@@ -26,7 +37,10 @@ public class buildtowers : MonoBehaviour
         if (currentPlaceableTower != null)
         {
             ObjectToMouse();
-            ReleaseByClick();
+            if (canPlace == true)
+            {
+                ReleaseByClick();
+            }
         }
     }
 
@@ -34,18 +48,32 @@ public class buildtowers : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            currentPlaceableTower.GetComponent<BoxCollider>().enabled = true;
             currentPlaceableTower = null;
         }
     }
     private void ObjectToMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        LayerMask tower = LayerMask.GetMask("tower");
+        LayerMask path = LayerMask.GetMask("path");
         
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
             currentPlaceableTower.transform.position = new Vector3(hit.point.x, hit.point.y + prefabObject.transform.position.y, hit.point.z);
             currentPlaceableTower.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            if (hit.collider.gameObject.CompareTag("tower") || hit.collider.gameObject.CompareTag("path"))
+            {
+                renderedObject.material.color = Color.red;
+                canPlace = false;
+            }
+            else
+            {
+                renderedObject.material.color = Color.green;
+                canPlace = true;
+            }
+
         }
     }
     
@@ -56,6 +84,12 @@ public class buildtowers : MonoBehaviour
             if (currentPlaceableTower != null)
                 return;
             currentPlaceableTower = Instantiate(prefabObject);
+            renderedObject = currentPlaceableTower.GetComponent<Renderer>();
+        }
+
+        if (Input.GetKeyDown(cancelAction))
+        {
+            Destroy(currentPlaceableTower);
         }
     }
 }

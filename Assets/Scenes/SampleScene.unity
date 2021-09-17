@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &420801827
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 420801828}
+  - component: {fileID: 420801829}
+  m_Layer: 0
+  m_Name: visaulizer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &420801828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420801827}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &420801829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420801827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b32c29c1020bc469b88e51625f7d90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabload: {fileID: 7532492703810867912, guid: 3409748ced2caea42b4ab84172474e1c, type: 3}
 --- !u!1 &677531577
 GameObject:
   m_ObjectHideFlags: 0
@@ -425,8 +469,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced062c9f968e6944ba1d1d2a184037d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabObject: {fileID: 8036257011928337100, guid: 4e0572ee3c75602449fc593b84970905, type: 3}
-  placeTower: 97
+  prefabObject: {fileID: 5220579817676168250, guid: 3409748ced2caea42b4ab84172474e1c, type: 3}
+  renderedObject: {fileID: 7532492703810867912, guid: 3409748ced2caea42b4ab84172474e1c, type: 3}
+  getTower: 97
   cancelAction: 27
 --- !u!4 &1082340116
 Transform:
