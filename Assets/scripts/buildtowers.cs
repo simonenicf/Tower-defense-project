@@ -48,6 +48,7 @@ public class buildtowers : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            renderedObject.material.color = Color.white;
             currentPlaceableTower.GetComponent<BoxCollider>().enabled = true;
             currentPlaceableTower = null;
         }
@@ -57,12 +58,13 @@ public class buildtowers : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         LayerMask tower = LayerMask.GetMask("tower");
         LayerMask path = LayerMask.GetMask("path");
-        
+
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
             currentPlaceableTower.transform.position = new Vector3(hit.point.x, hit.point.y + prefabObject.transform.position.y, hit.point.z);
             currentPlaceableTower.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            // use overlap function here to check colliders in raduis.
             if (hit.collider.gameObject.CompareTag("tower") || hit.collider.gameObject.CompareTag("path"))
             {
                 renderedObject.material.color = Color.red;
