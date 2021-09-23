@@ -29,6 +29,16 @@ public class buildtowers : MonoBehaviour
         renderedObject = GetComponent<Renderer>();
     }
 
+    public GameObject GetPrefab()
+    {
+        return prefabObject;
+    }
+    
+    public void SetPrefab(GameObject obj)
+    {
+        prefabObject = obj;
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -48,6 +58,7 @@ public class buildtowers : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            renderedObject.material.color = Color.white;
             currentPlaceableTower.GetComponent<BoxCollider>().enabled = true;
             currentPlaceableTower = null;
         }
@@ -57,14 +68,25 @@ public class buildtowers : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         LayerMask tower = LayerMask.GetMask("tower");
         LayerMask path = LayerMask.GetMask("path");
-        
+
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
             currentPlaceableTower.transform.position = new Vector3(hit.point.x, hit.point.y + prefabObject.transform.position.y, hit.point.z);
             currentPlaceableTower.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
-            if (hit.collider.gameObject.CompareTag("tower") || hit.collider.gameObject.CompareTag("path"))
+            // use overlap function here to check colliders in raduis.
+            Collider[] hitColliders = Physics.OverlapBox(hit.point,new Vector3(1,1,1), Quaternion.identity);
+            int i = 0;
+            bool overlap = false;
+            while (i < hitColliders.Length)
             {
+                if (hitColliders[i].gameObject.CompareTag("tower") || hit.collider.gameObject.CompareTag("path"))
+                {
+                    overlap = true;
+                }
+                i++;
+            }
+            if (overlap == true) {    
                 renderedObject.material.color = Color.red;
                 canPlace = false;
             }
@@ -73,7 +95,6 @@ public class buildtowers : MonoBehaviour
                 renderedObject.material.color = Color.green;
                 canPlace = true;
             }
-
         }
     }
     
