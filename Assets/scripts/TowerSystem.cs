@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-
-public class buildtowers : MonoBehaviour
+// General System for placing and getting towers
+public class TowerSystem : MonoBehaviour
 {
     [SerializeField] 
     private GameObject prefabObject;
@@ -17,16 +17,17 @@ public class buildtowers : MonoBehaviour
     
     [SerializeField]
     private KeyCode cancelAction = KeyCode.Escape;
-
-    private GameObject currentPlaceableTower;
-    private bool canPlace;
+    
+    private GameObject _currentPlaceableTower;
+    private bool _canPlace;
     void Start()
     {
         // retrieve's the prefab form asset folder
-        prefabObject = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/prefab-test.prefab");
+        prefabObject = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/Base_tower.prefab");
         Debug.Log(prefabObject);
-        Debug.Log((GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/prefab-test.prefab"));
+        Debug.Log((GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/Base_tower.prefab"));
         renderedObject = GetComponent<Renderer>();
+
     }
 
     public GameObject GetPrefab()
@@ -44,10 +45,10 @@ public class buildtowers : MonoBehaviour
     {
         HandleObjectKey();
 
-        if (currentPlaceableTower != null)
+        if (_currentPlaceableTower != null)
         {
             ObjectToMouse();
-            if (canPlace == true)
+            if (_canPlace == true)
             {
                 ReleaseByClick();
             }
@@ -59,8 +60,9 @@ public class buildtowers : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             renderedObject.material.color = Color.white;
-            currentPlaceableTower.GetComponent<BoxCollider>().enabled = true;
-            currentPlaceableTower = null;
+            _currentPlaceableTower.GetComponent<Collider>().enabled = true;
+            _currentPlaceableTower.transform.GetChild(0).gameObject.SetActive(false);
+            _currentPlaceableTower = null;
         }
     }
     private void ObjectToMouse()
@@ -72,8 +74,8 @@ public class buildtowers : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            currentPlaceableTower.transform.position = new Vector3(hit.point.x, hit.point.y + prefabObject.transform.position.y, hit.point.z);
-            currentPlaceableTower.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            _currentPlaceableTower.transform.position = new Vector3(hit.point.x, hit.point.y + prefabObject.transform.position.y, hit.point.z);
+            _currentPlaceableTower.transform.rotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
             // use overlap function here to check colliders in raduis.
             Collider[] hitColliders = Physics.OverlapBox(hit.point,new Vector3(1,1,1), Quaternion.identity);
             int i = 0;
@@ -88,12 +90,12 @@ public class buildtowers : MonoBehaviour
             }
             if (overlap == true) {    
                 renderedObject.material.color = Color.red;
-                canPlace = false;
+                _canPlace = false;
             }
             else
             {
                 renderedObject.material.color = Color.green;
-                canPlace = true;
+                _canPlace = true;
             }
         }
     }
@@ -102,15 +104,15 @@ public class buildtowers : MonoBehaviour
     {
         if (Input.GetKeyDown(getTower))
         {
-            if (currentPlaceableTower != null)
+            if (_currentPlaceableTower != null)
                 return;
-            currentPlaceableTower = Instantiate(prefabObject);
-            renderedObject = currentPlaceableTower.GetComponent<Renderer>();
+            _currentPlaceableTower = Instantiate(prefabObject);
+            renderedObject = _currentPlaceableTower.GetComponent<Renderer>();
         }
 
         if (Input.GetKeyDown(cancelAction))
         {
-            Destroy(currentPlaceableTower);
+            Destroy(_currentPlaceableTower);
         }
     }
 }

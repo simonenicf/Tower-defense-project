@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9bd325ab-2b3e-44b7-b2c6-21d1bb452e38" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.tower defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.tower defense/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Base_tower_mat.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/Base_tower_mat.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/tower-transparent.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Materials/tower-transparent.mat.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Untitled-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Untitled-1.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/renderobject.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/renderobject.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/scripts/buildtowers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/scripts/buildtowers.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/prefabs/Base_tower Variant.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/prefabs/Base_tower Variant.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/prefabs/Base_tower.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/prefabs/Base_tower.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/scripts/Base_tower.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/scripts/Base_tower.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/scripts/Button_scripts/LoadTower.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/scripts/Button_scripts/LoadTower.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/scripts/buildtowers.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/scripts/TowerSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/scripts/buildtowers.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/scripts/TowerSystem.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +80,11 @@
       <workItem from="1631644686703" duration="3146000" />
       <workItem from="1631897806011" duration="3206000" />
       <workItem from="1631962952149" duration="2336000" />
+      <workItem from="1632420753844" duration="890000" />
+      <workItem from="1633249318761" duration="9206000" />
+      <workItem from="1633351346281" duration="8315000" />
+      <workItem from="1633401384861" duration="7528000" />
+      <workItem from="1633496513248" duration="2954000" />
     </task>
     <servers />
   </component>
@@ -80,6 +94,18 @@
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
