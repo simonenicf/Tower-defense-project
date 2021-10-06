@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Base_tower : MonoBehaviour
+public class Tower : MonoBehaviour
 {
     // private int damage = 1;
-    // private float raduis;
+    // private float radius;
     // private int cost;
 
     void OnCollisionEnter()
@@ -21,6 +22,5 @@ public class Base_tower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

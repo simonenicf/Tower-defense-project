@@ -10,7 +10,7 @@ public class LoadTower : MonoBehaviour
 {
     private GameObject loadedPrefab;
 
-    public buildtowers towerBuildScript;
+    public TowerSystem towerBuildScript;
     //private GameObject getCanvas;
     //private Transform thisCanvas;
     //private GameObject towerButton1;
@@ -24,13 +24,24 @@ public class LoadTower : MonoBehaviour
     {
         if (Input.GetKeyDown("b"))
         {
-            LoadPrefab();
+            LoadTower1();
+        }
+        if (Input.GetKeyDown("s"))
+        {
+            LoadTower2();
         }
     }
 
-    private void LoadPrefab()
+    private void LoadTower1()
     {
-        loadedPrefab = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Capsule.prefab");
+        loadedPrefab = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/AoE_tower.prefab");
+        Debug.Log(loadedPrefab);
+        towerBuildScript.SetPrefab(loadedPrefab);
+    }
+
+    private void LoadTower2()
+    {
+        loadedPrefab = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/Base_tower.prefab");
         Debug.Log(loadedPrefab);
         towerBuildScript.SetPrefab(loadedPrefab);
     }

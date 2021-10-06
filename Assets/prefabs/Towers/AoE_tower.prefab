@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1132596949649574741, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4225574592730320277, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -17,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4225574592730320277, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4225574592730320277, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_LocalPosition.z
@@ -53,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5444796403255618200, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_Name
-      value: Base_tower
+      value: AoE_tower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
