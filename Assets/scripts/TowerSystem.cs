@@ -1,25 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
+
 // General System for placing and getting towers
 public class TowerSystem : MonoBehaviour
 {
-    [SerializeField] 
-    private GameObject prefabObject;
-    
-    [SerializeField]
-    private Renderer renderedObject;
-
-    [SerializeField]
-    private KeyCode getTower = KeyCode.A;
-    
-    [SerializeField]
-    private KeyCode cancelAction = KeyCode.Escape;
-    
-    private GameObject _currentPlaceableTower;
+    // variable's in script
+    [SerializeField] private Renderer renderedObject;
+    [SerializeField] private KeyCode getTower = KeyCode.A;
+    [SerializeField] private KeyCode cancelAction = KeyCode.Escape;
     private bool _canPlace;
+    private GameObject _currentPlaceableTower;
+    // Is used by an other script
+    [SerializeField] private GameObject prefabObject;
+    // Access to other script to use getter's and setter's
+    private LoadTower loadTowerS; // uses _buildMode of this script
     void Start()
     {
         // retrieve's the prefab form asset folder
