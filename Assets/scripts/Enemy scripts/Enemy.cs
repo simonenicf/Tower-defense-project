@@ -25,4 +25,7 @@ public class Enemy : MonoBehaviour
             enemyHealthSys.TakeDamage(1);
         }
     }
+    
+    
+
 }

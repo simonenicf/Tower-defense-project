@@ -11,10 +11,13 @@ public class TowerSystem : MonoBehaviour
     [SerializeField] private KeyCode cancelAction = KeyCode.Escape;
     private bool _canPlace;
     private GameObject _currentPlaceableTower;
+    
     // Is used by an other script
     [SerializeField] private GameObject prefabObject;
+    
     // Access to other script to use getter's and setter's
     private LoadTower loadTowerS; // uses _buildMode of this script
+    
     void Start()
     {
         // retrieve's the prefab form asset folder
@@ -40,13 +43,11 @@ public class TowerSystem : MonoBehaviour
     {
         HandleObjectKey();
 
-        if (_currentPlaceableTower != null)
+        if (_currentPlaceableTower == null) return;
+        ObjectToMouse();
+        if (_canPlace == true)
         {
-            ObjectToMouse();
-            if (_canPlace == true)
-            {
-                ReleaseByClick();
-            }
+            ReleaseByClick();
         }
     }
 
