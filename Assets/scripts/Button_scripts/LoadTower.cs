@@ -27,14 +27,14 @@ public class LoadTower : MonoBehaviour
         }
     }
 
-    private void LoadTower1()
+    public void LoadTower1()
     {
         loadedPrefab = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/AoE_tower.prefab");
         Debug.Log(loadedPrefab);
         towerBuildScript.SetPrefab(loadedPrefab);
     }
 
-    private void LoadTower2()
+    public void LoadTower2()
     {
         loadedPrefab = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/Base_tower.prefab");
         Debug.Log(loadedPrefab);

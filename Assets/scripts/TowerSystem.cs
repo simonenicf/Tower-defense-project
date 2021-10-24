@@ -1,3 +1,4 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -7,27 +8,24 @@ public class TowerSystem : MonoBehaviour
 {
     // variable's in script
     [SerializeField] private Renderer renderedObject;
-    [SerializeField] private KeyCode getTower = KeyCode.A;
+    //[SerializeField] private KeyCode getTower = KeyCode.A;
     [SerializeField] private KeyCode cancelAction = KeyCode.Escape;
     private bool _canPlace;
     private GameObject _currentPlaceableTower;
-    
+
+    private bool hasObj;
     // Is used by an other script
     [SerializeField] private GameObject prefabObject;
     
     // Access to other script to use getter's and setter's
     private LoadTower loadTowerS; // uses _buildMode of this script
-    
-    void Start()
+
+    private void Awake()
     {
-        // retrieve's the prefab form asset folder
-        prefabObject = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/Base_tower.prefab");
-        Debug.Log(prefabObject);
-        Debug.Log((GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/Base_tower.prefab"));
+        prefabObject = GetComponent<GameObject>();
         renderedObject = GetComponent<Renderer>();
-
     }
-
+    
     public GameObject GetPrefab()
     {
         return prefabObject;
@@ -41,8 +39,17 @@ public class TowerSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleObjectKey();
-
+        if (Input.GetKeyDown(cancelAction) && _currentPlaceableTower != null)
+        {
+            Destroy(_currentPlaceableTower);
+            prefabObject = null;
+            hasObj = false;
+        }
+        if (prefabObject == null) return;
+        if (!hasObj)
+        {
+            CreateTower();
+        }
         if (_currentPlaceableTower == null) return;
         ObjectToMouse();
         if (_canPlace == true)
@@ -59,6 +66,8 @@ public class TowerSystem : MonoBehaviour
             _currentPlaceableTower.GetComponent<Collider>().enabled = true;
             _currentPlaceableTower.transform.GetChild(0).gameObject.SetActive(false);
             _currentPlaceableTower = null;
+            prefabObject = null;
+            hasObj = false;
         }
     }
     private void ObjectToMouse()
@@ -95,20 +104,12 @@ public class TowerSystem : MonoBehaviour
             }
         }
     }
-    
-    private void HandleObjectKey()
-    {
-        if (Input.GetKeyDown(getTower))
-        {
-            if (_currentPlaceableTower != null)
-                return;
-            _currentPlaceableTower = Instantiate(prefabObject);
-            renderedObject = _currentPlaceableTower.GetComponent<Renderer>();
-        }
 
-        if (Input.GetKeyDown(cancelAction))
-        {
-            Destroy(_currentPlaceableTower);
-        }
+    private void CreateTower()
+    {
+        _currentPlaceableTower = Instantiate(prefabObject);
+        renderedObject = _currentPlaceableTower.GetComponent<Renderer>();
+        hasObj = true;
     }
+    
 }
