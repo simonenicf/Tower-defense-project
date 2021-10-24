@@ -6,6 +6,7 @@ TagManager:
   tags:
   - tower
   - path
+  - Enemy
   layers:
   - Default
   - TransparentFX
