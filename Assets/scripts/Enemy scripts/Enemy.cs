@@ -5,27 +5,51 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private EnemyHealthComponent enemyHealthSys;
+    [SerializeField] private GameManager manager;
     private Path_Follower _pathWalker;
-    [SerializeField] private float health;
     [SerializeField] private float speed;
-    private void Start()
+    [SerializeField] private int health = 1;
+    private bool isActive = true;
+    [SerializeField] private bool isAlive;
+
+    public bool IsAlive
     {
-        // enemyHealthSys = FindObjectOfType<EnemyHealthComponent>();
-        _pathWalker = FindObjectOfType<Path_Follower>();
-        
-        enemyHealthSys.starthealth = health;
-        _pathWalker.speedOfWalker = speed;
+        get { return health > 0; }
+    }
+    public bool IsActive
+    {
+        get { return isActive; }
+        set { isActive = value; }
     }
 
-    private void Update()
+    public int Health
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            enemyHealthSys.TakeDamage(1);
-        }
+        get { return health; }
+        set { health = value; }
     }
     
+    private void Start()
+    {
+        manager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        health = 2;
+        _pathWalker = FindObjectOfType<Path_Follower>();
+        _pathWalker.speedOfWalker = speed;
+    }
     
+
+    public void TakeDamage(int damage)
+    {
+        if (isActiveAndEnabled)
+        {
+            health -= damage;
+            if (health <= 0)
+            {
+                _pathWalker.Release();
+                Debug.Log("I'm dead ");
+                manager.Money += 1;
+                isActive = false;
+            }
+        }
+    }
 
 }

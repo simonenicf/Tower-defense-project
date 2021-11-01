@@ -9,35 +9,65 @@ using UnityEngine.UI;
 public class LoadTower : MonoBehaviour
 {
     private GameObject loadedPrefab;
-
+    [SerializeField] private GameManager gameManagerScript;
     public TowerSystem towerBuildScript;
-    //private GameObject getCanvas;
-    //private Transform thisCanvas;
-    //private GameObject towerButton1;
+
+    [SerializeField] private int price;
+    private int currentPrice;
+    [SerializeField] private Text baseTowerPriceTxt;
     
+    // getters and setters
+    public int Price
+    {
+        get { return price; }
+    }
+
+    public int CurrentPrice
+    {
+        get { return currentPrice;}
+        set { currentPrice = value; }
+    }
+
+    // unity functions
+    private void Start()
+    {
+        baseTowerPriceTxt.text = "tower cost: " + price;
+    }
+
+ 
     private void Update()
     {
+        
         if (Input.GetKeyDown("b"))
         {
-            LoadTower1();
+            AoeTower();
         }
         if (Input.GetKeyDown("s"))
         {
-            LoadTower2();
+            BaseTower();
+        }
+    }
+    
+    // load tower functions
+    public void AoeTower()
+    {
+        if (gameManagerScript.Money >= price)
+        {
+            loadedPrefab = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/AoE_tower.prefab");
+            Debug.Log(loadedPrefab);
+            towerBuildScript.SetPrefab(loadedPrefab);
+            CurrentPrice = 5;
         }
     }
 
-    public void LoadTower1()
+    public void BaseTower()
     {
-        loadedPrefab = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/AoE_tower.prefab");
-        Debug.Log(loadedPrefab);
-        towerBuildScript.SetPrefab(loadedPrefab);
-    }
-
-    public void LoadTower2()
-    {
-        loadedPrefab = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/Base_tower.prefab");
-        Debug.Log(loadedPrefab);
-        towerBuildScript.SetPrefab(loadedPrefab);
+        if (gameManagerScript.Money >= price)
+        {
+            loadedPrefab = (GameObject) AssetDatabase.LoadAssetAtPath<GameObject>("Assets/prefabs/Towers/Base_tower.prefab");
+            Debug.Log(loadedPrefab);
+            towerBuildScript.SetPrefab(loadedPrefab);
+            CurrentPrice = 2;
+        }
     }
 }

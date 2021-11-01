@@ -8,19 +8,21 @@ public class TowerSystem : MonoBehaviour
 {
     // variable's in script
     [SerializeField] private Renderer renderedObject;
-    //[SerializeField] private KeyCode getTower = KeyCode.A;
     [SerializeField] private KeyCode cancelAction = KeyCode.Escape;
     private bool _canPlace;
     private GameObject _currentPlaceableTower;
-
     private bool hasObj;
+
+    private MeshRenderer rangedMeshRend;
     // Is used by an other script
     [SerializeField] private GameObject prefabObject;
     
     // Access to other script to use getter's and setter's
-    private LoadTower loadTowerS; // uses _buildMode of this script
-
-    private void Awake()
+    [SerializeField] private LoadTower loadTowerS; // uses _buildMode of this script
+    [SerializeField] private GameManager gmManger;
+    [SerializeField] private Tower thisTower;
+    
+    private void Start()
     {
         prefabObject = GetComponent<GameObject>();
         renderedObject = GetComponent<Renderer>();
@@ -39,7 +41,7 @@ public class TowerSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(cancelAction) && _currentPlaceableTower != null)
+        if (Input.GetKeyDown(cancelAction) || Input.GetMouseButtonDown(1) && _currentPlaceableTower != null)
         {
             Destroy(_currentPlaceableTower);
             prefabObject = null;
@@ -64,10 +66,17 @@ public class TowerSystem : MonoBehaviour
         {
             renderedObject.material.color = Color.white;
             _currentPlaceableTower.GetComponent<Collider>().enabled = true;
-            _currentPlaceableTower.transform.GetChild(0).gameObject.SetActive(false);
+            _currentPlaceableTower.transform.GetChild(0).GetComponent<Tower>().enabled = true;
+            // set current tower price
+            thisTower = _currentPlaceableTower.transform.GetChild(0).GetComponent<Tower>(); 
+            thisTower.Price = loadTowerS.CurrentPrice;
+            // deactivate renderer and objects
+            rangedMeshRend.enabled = false;
             _currentPlaceableTower = null;
             prefabObject = null;
             hasObj = false;
+            // lower money
+            gmManger.BuyTower();
         }
     }
     private void ObjectToMouse()
@@ -109,6 +118,8 @@ public class TowerSystem : MonoBehaviour
     {
         _currentPlaceableTower = Instantiate(prefabObject);
         renderedObject = _currentPlaceableTower.GetComponent<Renderer>();
+        rangedMeshRend = _currentPlaceableTower.transform.GetChild(0).GetComponent<MeshRenderer>();
+        rangedMeshRend.enabled = true;
         hasObj = true;
     }
     

@@ -9,31 +9,26 @@ using UnityEngine;
  */
 public class HealthSystem : MonoBehaviour
 {
-    private float _currentHealth;
-    private float _startHealth;
+    private int _currentHealth;
+    private int _startHealth;
 
-    public float getCurrentHealth
+    public int CurrentHealth
     {
         get { return _currentHealth; }
+        set { _currentHealth = value; }
     }
 
-    public float starthealth
+    public int starthealth
     {
         get => _startHealth;
         set => _startHealth = value;
     }
+    
 
-    private void Awake()
+    public void TakeDamage(int amount)
     {
-        // on the moment the script gets called set currenthealth equal to starthealth
-        _currentHealth = _startHealth;
-    }
-
-    public void TakeDamage(float amount)
-    {
-        _currentHealth -= amount;
+        CurrentHealth -= amount;
         HandleTakeDamage();
-
         if (_currentHealth <= 0)
         {
             Death();
@@ -46,7 +41,7 @@ public class HealthSystem : MonoBehaviour
         print("ouch that hurts");
     }
 
-    protected virtual void Death()
+    public virtual void Death()
     {
         print("whelp, I'm dead");
     }
