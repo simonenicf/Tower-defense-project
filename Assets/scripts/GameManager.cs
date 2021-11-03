@@ -10,7 +10,9 @@ using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
-    // my variable's
+    // tower select variable's
+    private TowerUI towerUI;
+    [SerializeField] private GameObject selectedTower;
 
     // health variable's
     private int playerHealth;
@@ -82,6 +84,11 @@ public class GameManager : MonoBehaviour
         if (activeEnemiesInWave <= 0 && !gameOver)
         {
             wavebtn.SetActive(true);
+        }
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            selectTower();
         }
     }
 
@@ -180,5 +187,38 @@ public class GameManager : MonoBehaviour
         {
             Money -= loadTower.CurrentPrice;
         }
+    }
+
+    private void FindMyTower()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.gameObject.CompareTag("tower"))
+            {
+                selectedTower = hit.collider.gameObject;
+            }
+        }
+    }
+    
+    private void selectTower()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider.gameObject.CompareTag("tower"))
+            {
+                selectedTower = hit.collider.gameObject;
+                towerUI = selectedTower.GetComponent<TowerUI>();
+            }
+        }
+    }
+
+    public void SellTowers()
+    {
+        towerUI.SellTower();
+        Destroy(selectedTower);
     }
 }

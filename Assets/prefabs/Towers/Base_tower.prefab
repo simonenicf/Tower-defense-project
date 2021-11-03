@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 1065870457533461539}
   - component: {fileID: 3849497743357259024}
   - component: {fileID: 1132596949649574741}
-  - component: {fileID: -8404974642922087371}
+  - component: {fileID: 4423017200803662389}
   m_Layer: 0
   m_Name: Base_tower
   m_TagString: tower
@@ -231,7 +231,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8404974642922087371
+--- !u!114 &4423017200803662389
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

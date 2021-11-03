@@ -205,7 +205,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 26606967}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1416093457}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: SellTowers
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &26606967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2515,6 +2527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cedff5e1e0fef746bf69752db71ac39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedTower: {fileID: 0}
   playerHealthtxt: {fileID: 471734768}
   gameOverMenu: {fileID: 711167403}
   moneytxt: {fileID: 730173428}

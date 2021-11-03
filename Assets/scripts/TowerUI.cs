@@ -22,7 +22,7 @@ public class TowerUI : MonoBehaviour
         upgradePanel = upgradePanel.transform.GetChild(3).gameObject;
         txtButton = upgradePanel.transform.GetChild(1).gameObject;
         sellText = txtButton.transform.GetChild(0).GetComponent<Text>();
-
+        myManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     private void Update()
@@ -75,5 +75,11 @@ public class TowerUI : MonoBehaviour
     private bool IsOverUI()
     {
         return EventSystem.current.IsPointerOverGameObject();
+    }
+
+    public void SellTower()
+    {
+        upgradePanel.SetActive(false);
+        myManager.Money += myTower.Price / 2;
     }
 }

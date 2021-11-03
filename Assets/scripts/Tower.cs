@@ -113,5 +113,9 @@ public class Tower : MonoBehaviour
         projectile.transform.position = transform.position;
         projectile.InitializeTower(this);
     }
-    
+
+    public void DestroyMe()
+    {
+        Destroy(gameObject);
+    }
 }
