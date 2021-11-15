@@ -11,9 +11,8 @@ public class EnemyHealthComponent : HealthSystem
         print("enemy took damage");
     }
 
-    protected override void Death()
+    public override void Death()
     {
         print("enemy is dead");
-        Destroy(gameObject);
     }
 }

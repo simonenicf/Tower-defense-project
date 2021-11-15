@@ -16,9 +16,9 @@ public class Path_Follower : MonoBehaviour
     [SerializeField] private GameManager manager;
     [SerializeField] private Path path;
     private Transform _currentWaypoint;
-    private Enemy myEnemy;
-    
-    public float speedOfWalker
+    private Enemy pathEnemy;
+
+    public float SpeedOfWalker
     {
         get { return _speed; }
         set { _speed = value; }
@@ -68,14 +68,18 @@ public class Path_Follower : MonoBehaviour
         Debug.Log("yeah end me");
 
         // player takes damage part here
+        manager.PlayerHealth--;
         Release();
     }
 
-    private void Release()
+    public void Release()
     {
+        pathEnemy = gameObject.GetComponent<Enemy>();
+        pathEnemy.IsActive = false;
+        pathEnemy.ClearDebuffs();
         manager.wavesEnemies--;
         gameObject.SetActive(false);
-       _currentWaypoint = path.GetStartPath();
+        _currentWaypoint = path.GetStartPath();
        transform.position = _currentWaypoint.transform.position;
        transform.LookAt(_currentWaypoint);
     }
