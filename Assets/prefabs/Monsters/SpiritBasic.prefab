@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8076872644622771511}
   - component: {fileID: 1863474835}
   m_Layer: 0
-  m_Name: spiritRed
+  m_Name: SpiritBasic
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,5 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f021ec2675a75c04286126b2b6a0bf47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealthSys: {fileID: 0}
+  manager: {fileID: 0}
   speed: 2
+  health: 4
+  isAlive: 0
+  elementType: 4

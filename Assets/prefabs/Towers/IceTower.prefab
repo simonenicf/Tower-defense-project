@@ -1,51 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &7708512509919642375
+--- !u!114 &5514609806049329468
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1832350110942391370}
-  m_Enabled: 1
+  m_GameObject: {fileID: 6774963371637542487}
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab34330496b882540bf7cfebf2a0192b, type: 3}
+  m_Script: {fileID: 11500000, guid: 507332f6912dff548a6a6d7004d283d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileType: SnowBall
-  debuffDuration: 0
+  projectileType: IceBall
+  debuffDuration: 5
   proc: 100
   attackCooldown: 3
   projectileSpeed: 7
   damage: 1
   enemyHealth: {fileID: 0}
   gameManager: {fileID: 0}
---- !u!1001 &12719722825013780
+  slowingFactor: 25
+--- !u!1001 &5135618120102393865
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1132596949649574741, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 3849497743357259024, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1eeeea131bd7d14cbb3bbae035fa219, type: 2}
     - target: {fileID: 4225574592730320277, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4225574592730320277, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4225574592730320277, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.83
       objectReference: {fileID: 0}
     - target: {fileID: 4225574592730320277, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4225574592730320277, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_LocalRotation.w
@@ -77,14 +78,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5444796403255618200, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_Name
-      value: AoE_tower
+      value: IceTower
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1632394961643231386, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
     - {fileID: 6780596252801988679, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
---- !u!1 &1832350110942391370 stripped
+--- !u!1 &6774963371637542487 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1819700759013242462, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
-  m_PrefabInstance: {fileID: 12719722825013780}
+  m_PrefabInstance: {fileID: 5135618120102393865}
   m_PrefabAsset: {fileID: 0}

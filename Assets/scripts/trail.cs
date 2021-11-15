@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class trail : MonoBehaviour
@@ -8,10 +9,12 @@ public class trail : MonoBehaviour
     private float _triggerDistance = 0.1f;
     [SerializeField] private Path path;
     private Transform _currentWaypoint;
+    private TrailRenderer trailRend;
 
     private void Start()
     {
         SetupTrail();
+        trailRend = GetComponent<TrailRenderer>();
     }
     
     private void SetupTrail()
@@ -44,8 +47,10 @@ public class trail : MonoBehaviour
 
     private void PathCompleted()
     {
-        _currentWaypoint = path.GetStartPath();
-        transform.position = _currentWaypoint.transform.position;
-        transform.LookAt(_currentWaypoint);
+        _speed = 0;
+        //_currentWaypoint = path.GetStartPath();
+        //transform.position = _currentWaypoint.transform.position;
+        //transform.LookAt(_currentWaypoint);
+        //trailRend.Clear();
     }
 }

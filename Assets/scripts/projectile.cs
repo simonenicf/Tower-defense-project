@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class projectile : MonoBehaviour
 {
     private Enemy target;
     private Tower parent;
+    private Element elementType;
     [SerializeField] private GameManager gameManager;
     
     // Start is called before the first frame update
@@ -27,8 +29,9 @@ public class projectile : MonoBehaviour
         {
             if (target.gameObject == other.gameObject)
             {
-                target.TakeDamage(parent.Damage);
+                target.TakeDamage(parent.Damage, elementType);
                 gameManager.Pool.ReleaseObject(gameObject);
+                ApplyDebuff();
             }
         }
     }
@@ -37,6 +40,7 @@ public class projectile : MonoBehaviour
     {
         this.target = parent.Target;
         this.parent = parent;
+        this.elementType = parent.ElementType;
     }
     private void StalkTarget()
     {
@@ -48,6 +52,18 @@ public class projectile : MonoBehaviour
         else if (!target.IsActive)
         {
             gameManager.Pool.ReleaseObject(gameObject);
+        }
+    }
+
+    private void ApplyDebuff()
+    {
+        if (target.ElementType != elementType)
+        {
+            float roll = Random.Range(0, 100);
+            if (roll <= parent.Proc)
+            {
+                target.AddDebuff(parent.GetDebuff());
+            }
         }
     }
 }

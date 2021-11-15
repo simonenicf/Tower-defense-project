@@ -8,17 +8,26 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+public delegate void CurrencyChanged();
+
 public class GameManager : MonoBehaviour
 {
+    public event CurrencyChanged Changed;
+    [SerializeField] private GameObject statsPanel;
+    [SerializeField] private Text statText;
+    
     // tower select variable's
     private TowerUI towerUI;
     [SerializeField] private GameObject selectedTower;
+
+    public GameObject SelectedTower => selectedTower;
 
     // health variable's
     private int playerHealth;
     [SerializeField] private Text playerHealthtxt;
     private bool gameOver = false;
     [SerializeField] private GameObject gameOverMenu;
+    [SerializeField] private GameObject victoryMenu;
     
     // money variable's
     private int money;
@@ -32,6 +41,7 @@ public class GameManager : MonoBehaviour
     private bool waveActive;
     private int activeEnemiesInWave;
     private int currentEnemySpawn;
+    private float setHealth;
     
     // my getter's and setters
     public ObjectPool Pool { get; set; }
@@ -43,9 +53,13 @@ public class GameManager : MonoBehaviour
         {
             this.money = value;
             this.moneytxt.text = value.ToString();
+            
+            OnCurrencyChanged();
         }
     }
 
+    public bool InScreen { get; set; }
+    
     public int PlayerHealth
     {
         get { return playerHealth;}
@@ -97,6 +111,7 @@ public class GameManager : MonoBehaviour
     {
         if (!gameOver)
         {
+            InScreen = true;
             gameOver = true;
             gameOverMenu.SetActive(true);
         }
@@ -112,7 +127,12 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
-    
+
+    public void VictoryScreen()
+    {
+        InScreen = true;
+        victoryMenu.SetActive(true);
+    }
     // My TowerUI function
 
 
@@ -129,9 +149,9 @@ public class GameManager : MonoBehaviour
     private IEnumerator SpawnWave()
     {
         AmountToSpawn();
+        activeEnemiesInWave = currentEnemySpawn;
         for (int i = 0; i < currentEnemySpawn; i++)
         {
-            activeEnemiesInWave++;
             int enemyIndex = wave;
             string type = String.Empty;
 
@@ -139,19 +159,20 @@ public class GameManager : MonoBehaviour
             {
                 // goes of a wave by wave basis
                 case 1:
-                    type = "spiritRed";
+                    type = "SpiritBasic";
                     break;
                 case 2:
                     if (i < 4)
                     {
-                        type = "spiritRed";
+                        type = "SpiritBasic";
                     }
                     else
                     {
-                        type = "spiritPurple";
+                        type = "SpiritLightning";
                     }
                     break;
                 default:
+                    VictoryScreen();
                     break;
             }
         
@@ -189,6 +210,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void OnCurrencyChanged()
+    {
+        if (Changed != null)
+        {
+            Changed();
+        }
+    }
+    
     private void FindMyTower()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -220,5 +249,20 @@ public class GameManager : MonoBehaviour
     {
         towerUI.SellTower();
         Destroy(selectedTower);
+    }
+
+    public void ShowStats()
+    {
+        statsPanel.SetActive(!statsPanel.activeSelf);
+    }
+
+    public void SetTooltipText(string txt)
+    {
+        statText.text = txt;
+    }
+
+    public void UpdateToolTip()
+    {
+        
     }
 }

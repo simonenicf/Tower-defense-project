@@ -5,17 +5,25 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Timeline;
 
-public class Tower : MonoBehaviour
+public enum Element { STORM, FIRE, ICE, TOXIC, NONE }
+
+public abstract class Tower : MonoBehaviour
 {
+    // upgrade's
+    public TowerUpgrade[] Upgrades { get; protected set; }
+    // some stuff
     [SerializeField] string projectileType;
-    
     private Queue<Enemy> enemy = new Queue<Enemy>();
     private Enemy target;
     private bool canAttack = true;
     private float attackTimer;
+    // tower stats
+    [SerializeField] private float debuffDuration;
+    [SerializeField] private float proc;
     [SerializeField] float attackCooldown;
     [SerializeField] float projectileSpeed;
     [SerializeField] private int damage;
+
 
     // variable's that access other scripts
     [SerializeField] private EnemyHealthComponent enemyHealth;
@@ -38,20 +46,32 @@ public class Tower : MonoBehaviour
         get { return damage; }
     }
     
-    public int Price { get; set; }
-
-    // Start is called before the first frame update
-    void Start()
+    public float Proc
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        get => proc;
+        set => proc = value;
     }
     
+    public Element ElementType { get; protected set; }
+    
+    public float DebuffDuration
+    {
+        get => debuffDuration;
+        set => debuffDuration = value;
+    }
+    
+    public int Price { get; set; }
+
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Attack();
     }
 
+    private void Awake()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
@@ -68,6 +88,8 @@ public class Tower : MonoBehaviour
         }
     }
 
+    public abstract Debuff GetDebuff();
+    
     private void Attack()
     {
         // if you can't attack timer counts up till its higher or equal to attackCooldown
@@ -100,7 +122,7 @@ public class Tower : MonoBehaviour
             target = enemy.Dequeue();
         }
 
-        if (target != null && !target.IsAlive)
+        if (target != null && !target.IsAlive || target != null && !target.IsActive)
         {
             target = null;
         }
@@ -108,9 +130,8 @@ public class Tower : MonoBehaviour
 
     private void shoot()
     {
-        projectile projectile = gameManager.Pool.GetObject(projectileType).GetComponent<projectile>();
-
-        projectile.transform.position = transform.position;
+        var projectile = gameManager.Pool.GetObject(projectileType).GetComponent<projectile>();
+        projectile.transform.position = this.transform.position;
         projectile.InitializeTower(this);
     }
 

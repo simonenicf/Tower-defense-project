@@ -1,36 +1,39 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &7708512509919642375
+--- !u!114 &6278435217090766457
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1832350110942391370}
-  m_Enabled: 1
+  m_GameObject: {fileID: 4573469474043702360}
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab34330496b882540bf7cfebf2a0192b, type: 3}
+  m_Script: {fileID: 11500000, guid: df1e28177a298864d9224047c944db75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileType: SnowBall
-  debuffDuration: 0
+  projectileType: ToxicGoo
+  debuffDuration: 5
   proc: 100
-  attackCooldown: 3
-  projectileSpeed: 7
+  attackCooldown: 5
+  projectileSpeed: 8
   damage: 1
   enemyHealth: {fileID: 0}
   gameManager: {fileID: 0}
---- !u!1001 &12719722825013780
+  splashDamage: 5
+  tickTime: 5
+  splashPrefab: {fileID: 4841482815540169373, guid: 0f406862b56f1ff4d9ea98f75651f935, type: 3}
+--- !u!1001 &2754191362362022406
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1132596949649574741, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 3849497743357259024, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 42c588d3519b5fe48a6824beaadb395e, type: 2}
     - target: {fileID: 4225574592730320277, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -41,7 +44,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4225574592730320277, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0.83
       objectReference: {fileID: 0}
     - target: {fileID: 4225574592730320277, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_LocalPosition.z
@@ -77,14 +80,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5444796403255618200, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
       propertyPath: m_Name
-      value: AoE_tower
+      value: ToxicTower
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 1632394961643231386, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
     - {fileID: 6780596252801988679, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
---- !u!1 &1832350110942391370 stripped
+--- !u!1 &4573469474043702360 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1819700759013242462, guid: 40847f1d6e20a8d4791d07a22c832952, type: 3}
-  m_PrefabInstance: {fileID: 12719722825013780}
+  m_PrefabInstance: {fileID: 2754191362362022406}
   m_PrefabAsset: {fileID: 0}

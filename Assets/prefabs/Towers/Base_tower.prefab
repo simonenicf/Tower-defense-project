@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8077967150148329673}
   - component: {fileID: 3036110701814067292}
   - component: {fileID: 5619983427961035704}
-  - component: {fileID: 1632394961643231386}
   - component: {fileID: 1461450018081263257}
+  - component: {fileID: 6780596252801988679}
   m_Layer: 2
   m_Name: Cylinder
   m_TagString: Untagged
@@ -99,24 +99,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &1632394961643231386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819700759013242462}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e627182aa3ee8154d87669494575d1df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectileType: SnowBall
-  attackCooldown: 3
-  projectileSpeed: 7
-  damage: 1
-  enemyHealth: {fileID: 0}
-  gameManager: {fileID: 0}
 --- !u!54 &1461450018081263257
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -133,6 +115,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6780596252801988679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819700759013242462}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab34330496b882540bf7cfebf2a0192b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileType: SnowBall
+  debuffDuration: 0
+  proc: 100
+  attackCooldown: 3
+  projectileSpeed: 7
+  damage: 1
+  enemyHealth: {fileID: 0}
+  gameManager: {fileID: 0}
 --- !u!1 &5444796403255618200
 GameObject:
   m_ObjectHideFlags: 0
